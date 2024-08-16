@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Event Scheduler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #572c81;
+        }
+        a.button {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: #572c81;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .event-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .event-list li {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Dynamic Event Scheduler</h1>
+        <p>This is your one-stop platform for scheduling and managing events with ease.</p>
+
+        <a href="{% url 'event_list' %}" class="button">View All Events</a>
+        <a href="{% url 'event_create' %}" class="button">Create a New Session</a>
+
+        <h2>Upcoming Events</h2>
+        <ul class="event-list">
+            {% if events %}
+                {% for event in events %}
+                    <li>
+                        <strong>{{ event.title }}</strong><br>
+                        {{ event.date }} at {{ event.location }}<br>
+                        <a href="{% url 'event_detail' event.pk %}">View Details</a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p>No events scheduled yet. <a href="{% url 'event_create' %}">Create an event</a> to get started!</p>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>

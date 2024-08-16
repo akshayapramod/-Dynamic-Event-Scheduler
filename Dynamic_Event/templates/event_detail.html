@@ -1,0 +1,17 @@
+<h1>{{ event.title }}</h1>
+<p>{{ event.description }}</p>
+<p>{{ event.date }}</p>
+<p>{{ event.location }}</p>
+<a href="{% url 'event_update' event.pk %}">Edit</a>
+<a href="{% url 'event_delete' event.pk %}">Delete</a>
+
+<h2>Sessions</h2>
+<a href="{% url 'session_create' event.pk %}">Add Session</a>
+<ul>
+    {% for session in event.sessions.all %}
+        <li>{{ session.title }} - {{ session.start_time }} to {{ session.end_time }}
+            <a href="{% url 'session_update' session.pk %}">Edit</a>
+            <a href="{% url 'session_delete' session.pk %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
